@@ -8,11 +8,44 @@
 const onclickPokemonId = () => {
     const inputPokemonId = document.getElementById('Pokemon-id').value;
     fetchPokemonApi(inputPokemonId);
+    getPokemonImage(inputPokemonId);
 };
 
+//PokemonAPIからデータを取得
 const fetchPokemonApi = async (pokemonId) => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
-    const response = await fetch(url);
+    //英語名で取得
+    const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+    const response = await fetch(pokemonDataUrl);
     const reslt = await response.json();
-    console.log(reslt.name)
+    selectPokemonData(reslt, pokemonId)
 };
+
+//必要なデータのみ
+const selectPokemonData = (data, number) => {
+    const showPokemonData = document.getElementById('showPokemonData');
+    showPokemonData.innerText = data.name;
+    console.log(showPokemonData)
+};
+
+
+
+//imageの取得
+const getPokemonImage = (pokemonId) => {
+    if (pokemonId <= 9) {
+        pokemonId = `00${pokemonId}`;
+        console.log(pokemonId);
+    }else if (pokemonId <= 99) {
+        pokemonId = `0${pokemonId}`;
+        console.log(pokemonId);
+    }
+
+    pokemonImage = document.getElementById('pokemonImage');
+    pokemonImage.src =`../images/${pokemonId}.png`;
+}
+
+
+///画面表示時にID:1の「フシギダネ」を表示させる
+(() => {
+    fetchPokemonApi(1);
+    getPokemonImage(1);
+    })();
