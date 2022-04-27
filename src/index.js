@@ -24,7 +24,6 @@ const fetchPokemonApi = async (pokemonId) => {
 const selectPokemonData = (data, number) => {
     const showPokemonData = document.getElementById('showPokemonData');
     showPokemonData.innerText = data.name;
-    console.log(showPokemonData)
 };
 
 
@@ -33,10 +32,8 @@ const selectPokemonData = (data, number) => {
 const getPokemonImage = (pokemonId) => {
     if (pokemonId <= 9) {
         pokemonId = `00${pokemonId}`;
-        console.log(pokemonId);
     }else if (pokemonId <= 99) {
         pokemonId = `0${pokemonId}`;
-        console.log(pokemonId);
     }
 
     pokemonImage = document.getElementById('pokemonImage');

@@ -1,0 +1,45 @@
+.pokemon-card{
+    margin: 10px;
+    padding: 8px 16px;
+    width: 200px;
+    min-height: 200px;
+    height: auto;
+    border: solid 3px #FFD36E;
+    border-radius: 10%;
+}
+
+.pokemon-card:hover{
+    background-color: #FFF56D;
+}
+
+.pokemon-name{
+    max-width: 30px;;
+}
+
+.pokemon-image{
+    width: 150px;
+    height: auto;
+}
+
+.input-box{
+    width: auto;
+    height: 20px;
+    border: solid 1px #000;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.search-button{
+    width: 80px;
+    height: 30px;
+    border: solid 1px #9FB4FF;
+    color: #9FB4FF;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.search-button:hover{
+    border: solid 1px #383838;
+    color: #383838;
+    background-color: #9FB4FF;
+}
