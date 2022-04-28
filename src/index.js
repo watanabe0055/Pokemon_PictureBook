@@ -4,6 +4,7 @@
 //image
 //https://github.com/fanzeyi/pokemon.json
 
+
 //inputのvauleを取得する
 const onclickPokemonId = () => {
     const inputPokemonId = document.getElementById('Pokemon-id').value;
@@ -29,15 +30,17 @@ const selectPokemonData = (data, number) => {
 
 
 //imageの取得
-const getPokemonImage = (pokemonId) => {
-    if (pokemonId <= 9) {
-        pokemonId = `00${pokemonId}`;
-    }else if (pokemonId <= 99) {
-        pokemonId = `0${pokemonId}`;
+const getPokemonImage = (id) => {
+    if (id <= 9) {
+        id = `00${id}`;
+    }else if (id <= 99) {
+        id = `0${id}`;
     }
 
-    pokemonImage = document.getElementById('pokemonImage');
-    pokemonImage.src =`../images/${pokemonId}.png`;
+    const pokemonImage = document.getElementById('pokemonImage');
+    const pokemonId = document.getElementById("pokemonId");
+    pokemonImage.src =`../images/${id}.png`;
+    pokemonId.innerHTML =id;
 }
 
 
