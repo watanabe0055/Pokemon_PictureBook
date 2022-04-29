@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./reset.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <p>ポケモン図鑑</p>
+        <input class="input-box" type="number" id="Pokemon-id" min="1" value="1" />
+        <button class="search-button" onclick="onclickPokemonId()">検索</button>
+    </div>
+    <div class="pokemon-card">
+        <img class="pokemon-image" id="pokemonImage" src="" alt="ポケモンの画像です"></img>
+        <di class="pokemon-card-items">
+            <dt class="item" id="pokemonId"></dt></dt>
+            <dt class="item" id="showPokemonData"></dt>
+            <dt class="item" id="showPokemonType"></dt>
+        </di>
+    </div>
+</body>
+<script src="./index.js"></script>
+</html>
