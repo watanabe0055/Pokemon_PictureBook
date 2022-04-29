@@ -1,0 +1,30 @@
+body{
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.pokemon-card{
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+    padding: 10px;
+    border: solid 1px #D5ECC2;
+    border-radius:  25px;
+    background-color: #D5ECC2;
+    box-shadow: 10px 15px 30px 0 rgba(0, 0, 0, .5);
+    text-align: center;
+}
+
+.pokemonImage{
+    margin: 0 auto;
+    width: 150px;
+    height: auto;
+}
+
+.image{
+    text-align: center;
+}
+
+.card-item{
+    margin: 8px 10px;
+    text-align: left;
+}
