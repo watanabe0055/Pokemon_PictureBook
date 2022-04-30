@@ -1,4 +1,5 @@
 body{
+    padding: 10px 20px;
     background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 }
 
@@ -6,12 +7,17 @@ body{
     width: 250px;
     height: 250px;
     margin: 10px;
-    padding: 10px;
+    padding: 20px 10px;
     border: solid 1px #D5ECC2;
     border-radius:  25px;
     background-color: #D5ECC2;
     box-shadow: 10px 15px 30px 0 rgba(0, 0, 0, .5);
     text-align: center;
+}
+
+.pokemon-card:hover{
+    background-color: #62D2A2;
+    border: #1FAB89;
 }
 
 .pokemonImage{
@@ -27,4 +33,17 @@ body{
 .card-item{
     margin: 8px 10px;
     text-align: left;
+}
+
+#container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#container:after{
+    content:"";
+    display:block;
+    width: 32%;
+    height:0;
 }

@@ -1,7 +1,7 @@
 //PokemonAPIからデータを取得
 const fetchPokemonApi = async () => {
     const allPokemonId = 809;
-    for (let i = 1; i <= 1; i++) {
+    for (let i = 1; i <= 30; i++) {
         await getPokemonData(i);
     }
 };
@@ -21,26 +21,16 @@ const createPokemonCard = (data) => {
         type: data.types,
         image: `../../images/${plasticSurgeryId(data.id)}.png`
     }
-    const pokemonInnerData = `No: ${plasticSurgeryId(data.id)}`
-    // const pokemonImage = document.getElementById('pokemon-image');
-    //pokemonImage.src  = pokemon.image;
-
-    // const pokemonId = document.getElementById('pokemonID');
-    // const pokemonName = document.getElementById('pokemonName');
-    // const pokemonType = document.getElementById('pokemonType');
-    // pokemonId.innerText = `No: ${plasticSurgeryId(data.id)}`;
-    // pokemonName.innerText = `Name: ${pokemon.name}`;
-    // pokemonType.innerText = `Type: ${plasticSurgeryType(pokemon.type)}`;
-
     //innerHTMLで一括で生成する
     const pokemonEl =document.createElement("div");
+    pokemonEl.classList.add("pokemon-card");
     pokemonEl.innerHTML= `<img src=${pokemon.image} alt="ポケモンの画像" class="pokemonImage" id="pokemon-image">
     <di>
         <dt class="card-item" id="pokemonID">No: ${plasticSurgeryId(data.id)}</dt>
         <dt class="card-item" id="pokemonName">Name: ${pokemon.name}</dt>
         <dt class="card-item" id="pokemonType">Type: ${plasticSurgeryType(pokemon.type)}</dt>
     </di>`;
-    const card = document.getElementById("pokemonCard");
+    const card = document.getElementById("container");
     card.appendChild(pokemonEl);
 };
 
