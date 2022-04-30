@@ -3,8 +3,8 @@ body{
 }
 
 .pokemon-card{
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     margin: 10px;
     padding: 10px;
     border: solid 1px #D5ECC2;
@@ -15,8 +15,8 @@ body{
 }
 
 .pokemonImage{
-    margin: 0 auto;
-    width: 150px;
+    margin: 0 auto 20px auto;
+    width: 100px;
     height: auto;
 }
 

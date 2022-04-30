@@ -21,15 +21,27 @@ const createPokemonCard = (data) => {
         type: data.types,
         image: `../../images/${plasticSurgeryId(data.id)}.png`
     }
-    const pokemonImage = document.getElementById('pokemon-image');
-    pokemonImage.src  = pokemon.image;
+    const pokemonInnerData = `No: ${plasticSurgeryId(data.id)}`
+    // const pokemonImage = document.getElementById('pokemon-image');
+    //pokemonImage.src  = pokemon.image;
 
-    const pokemonId = document.getElementById('pokemonID');
-    const pokemonName = document.getElementById('pokemonName');
-    const pokemonType = document.getElementById('pokemonType');
-    pokemonId.innerText = `No: ${plasticSurgeryId(data.id)}`;
-    pokemonName.innerText = `Name: ${pokemon.name}`;
-    pokemonType.innerText = `Type: ${plasticSurgeryType(pokemon.type)}`;
+    // const pokemonId = document.getElementById('pokemonID');
+    // const pokemonName = document.getElementById('pokemonName');
+    // const pokemonType = document.getElementById('pokemonType');
+    // pokemonId.innerText = `No: ${plasticSurgeryId(data.id)}`;
+    // pokemonName.innerText = `Name: ${pokemon.name}`;
+    // pokemonType.innerText = `Type: ${plasticSurgeryType(pokemon.type)}`;
+
+    //innerHTMLで一括で生成する
+    const pokemonEl =document.createElement("div");
+    pokemonEl.innerHTML= `<img src=${pokemon.image} alt="ポケモンの画像" class="pokemonImage" id="pokemon-image">
+    <di>
+        <dt class="card-item" id="pokemonID">No: ${plasticSurgeryId(data.id)}</dt>
+        <dt class="card-item" id="pokemonName">Name: ${pokemon.name}</dt>
+        <dt class="card-item" id="pokemonType">Type: ${plasticSurgeryType(pokemon.type)}</dt>
+    </di>`;
+    const card = document.getElementById("pokemonCard");
+    card.appendChild(pokemonEl);
 };
 
 
