@@ -1,6 +1,9 @@
+//ポケモンの総数
+//const allPokemonId = 809;
+const allPokemonId = 30;
+
 //PokemonAPIからデータを取得
 const fetchPokemonApi = async () => {
-    const allPokemonId = 809;
     for (let i = 1; i <= allPokemonId; i++) {
         await getPokemonData(i);
     }
@@ -24,17 +27,20 @@ const createPokemonCard = (data) => {
     //innerHTMLで一括で生成する
     const pokemonEl = document.createElement("div");
     pokemonEl.classList.add("pokemon-card");
+    pokemonEl.setAttribute("id", "pokemonCard");
     pokemonEl.innerHTML = `<img src=${
         pokemon.image
     } alt="ポケモンの画像" class="pokemonImage" id="pokemon-image">
     <di>
-        <dt class="card-item" id="pokemonID">No: ${plasticSurgeryId(
+        <dt class="card-item1" id=pokemonId${data.id}>No: ${plasticSurgeryId(
+        data.id
+    )}</dt>
+        <dt class="card-item" id="pokemonName${data.id}">Name: ${
+        pokemon.name
+    }</dt>
+        <dt class="card-item" id="pokemonType${
             data.id
-        )}</dt>
-        <dt class="card-item" id="pokemonName">Name: ${pokemon.name}</dt>
-        <dt class="card-item" id="pokemonType">Type: ${plasticSurgeryType(
-            pokemon.type
-        )}</dt>
+        }">Type: ${plasticSurgeryType(pokemon.type)}</dt>
     </di>`;
     const card = document.getElementById("container");
     card.appendChild(pokemonEl);
@@ -67,7 +73,19 @@ const pokemonCard = document.getElementById("pokemon-card");
 
 fetchPokemonApi();
 
-const toggle = document.getElementById("mycheck");
 const onClickToggle = () => {
-    console.log(toggle.checked);
+    const toggle = document.getElementById("mycheck");
+    //日本語の時
+    if (toggle.checked) {
+        deletePokemonCard();
+    }
+};
+
+const deletePokemonCard = () => {
+    for (let i = 1; i <= allPokemonId; i++) {
+        const name = document.getElementById(`pokemonName${i}`);
+        const types = document.getElementById(`pokemonType${i}`);
+        name.remove();
+        types.remove();
+    }
 };
