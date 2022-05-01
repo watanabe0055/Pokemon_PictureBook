@@ -1,49 +1,104 @@
-body{
+body {
     padding: 10px 20px;
     background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 }
 
-.pokemon-card{
+.pokemon-card {
     width: 250px;
-    height: 250px;
+    height: auto;
     margin: 10px;
     padding: 20px 10px;
-    border: solid 1px #D5ECC2;
-    border-radius:  25px;
-    background-color: #D5ECC2;
-    box-shadow: 10px 15px 30px 0 rgba(0, 0, 0, .5);
+    border: solid 1px #d5ecc2;
+    border-radius: 25px;
+    background-color: #d5ecc2;
+    box-shadow: 10px 15px 30px 0 rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
-.pokemon-card:hover{
-    background-color: #62D2A2;
-    border: #1FAB89;
+.pokemon-card:hover {
+    background-color: #62d2a2;
+    border: #1fab89;
 }
 
-.pokemonImage{
+.pokemonImage {
     margin: 0 auto 20px auto;
     width: 100px;
     height: auto;
 }
 
-.image{
+.image {
     text-align: center;
 }
 
-.card-item{
+.card-item {
     margin: 8px 10px;
     text-align: left;
 }
 
-#container{
+#container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-#container:after{
-    content:"";
-    display:block;
+#container:after {
+    content: "";
+    display: block;
     width: 32%;
-    height:0;
+    height: 0;
+}
+
+/* トグル */
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label.check {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    width: 100px;
+    height: 28px;
+    color: #969696;
+    border: 1px solid #a3a3a3;
+    border-radius: 3px;
+    background-color: #ffffff;
+}
+
+input[type="checkbox"]:checked + label.check {
+    border: 1px solid #4db4e4;
+    background-color: #4db4e4;
+}
+
+input[type="checkbox"] + label.check::before {
+    content: "English";
+    position: absolute;
+    top: 4px;
+    left: auto;
+    right: 6px;
+}
+
+input[type="checkbox"]:checked + label.check::before {
+    content: "日本語";
+    position: absolute;
+    left: 6px;
+    right: auto;
+    color: #ffffff;
+}
+
+input[type="checkbox"] + label.check > div {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 22px;
+    border: 1px solid #a3a3a3;
+    border-radius: 3px;
+    background-color: #ffffff;
+    transition: 0.2s;
+}
+
+input[type="checkbox"]:checked + label.check > div {
+    border: 1px solid transparent;
+    left: 82px;
 }
