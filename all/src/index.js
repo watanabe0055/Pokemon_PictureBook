@@ -1,6 +1,6 @@
 //ポケモンの総数
 //const allPokemonId = 809;
-const allPokemonId = 30;
+const allPokemonId = 10;
 
 //PokemonAPIからデータを取得
 const fetchPokemonApi = async () => {
@@ -77,15 +77,49 @@ const onClickToggle = () => {
     const toggle = document.getElementById("mycheck");
     //日本語の時
     if (toggle.checked) {
-        deletePokemonCard();
+        jpPokemonCard();
+    } else {
+        enPokemonCard();
     }
 };
 
-const deletePokemonCard = () => {
+//言語選択が日本語のとき
+const jpPokemonCard = async () => {
+    let count = 0;
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName${i}`);
         const types = document.getElementById(`pokemonType${i}`);
-        name.remove();
-        types.remove();
+        name.innerText = await changePokemonData(count, "jp");
+        count++;
+    }
+};
+
+//言語選択が英語のとき
+const enPokemonCard = async () => {
+    let count = 0;
+    for (let i = 1; i <= allPokemonId; i++) {
+        const name = document.getElementById(`pokemonName${i}`);
+        const types = document.getElementById(`pokemonType${i}`);
+        name.innerText = await changePokemonData(count, "en");
+        count++;
+    }
+};
+
+//
+const changePokemonData = async (id, lang) => {
+    //英語名で取得
+    const pokemonDataUrl = "../../pokedex.json";
+    const response = await fetch(pokemonDataUrl);
+    const reslt = await response.json();
+    switch (lang) {
+        case "jp":
+            return reslt[id].name.japanese;
+            break;
+        case "en":
+            return reslt[id].name.english;
+            break;
+        default:
+            return reslt[id].name.english;
+            break;
     }
 };
