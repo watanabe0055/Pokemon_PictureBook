@@ -1,6 +1,5 @@
 //ポケモンの総数
-//const allPokemonId = 809;
-const allPokemonId = 30;
+const allPokemonId = 809;
 
 //PokemonAPIからデータを取得
 const fetchPokemonApi = async () => {
@@ -69,23 +68,81 @@ const plasticSurgeryType = (pokemonType) => {
     return types;
 };
 
-const pokemonCard = document.getElementById("pokemon-card");
-
 fetchPokemonApi();
 
 const onClickToggle = () => {
     const toggle = document.getElementById("mycheck");
     //日本語の時
     if (toggle.checked) {
-        deletePokemonCard();
+        jpPokemonCard();
+    } else {
+        enPokemonCard();
     }
 };
 
-const deletePokemonCard = () => {
+//言語選択が日本語のとき
+const jpPokemonCard = async () => {
+    let count = 0;
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName${i}`);
         const types = document.getElementById(`pokemonType${i}`);
-        name.remove();
-        types.remove();
+        name.innerText = await changeLanguagePokemonName(count, "jp");
+        changeLanguagePokemonType(i, "jp");
+        types.innerText = await changeLanguagePokemonType(i, "jp");
+        count++;
     }
+};
+
+//言語選択が英語のとき
+const enPokemonCard = async () => {
+    let count = 0;
+    for (let i = 1; i <= allPokemonId; i++) {
+        const name = document.getElementById(`pokemonName${i}`);
+        const types = document.getElementById(`pokemonType${i}`);
+        name.innerText = await changeLanguagePokemonName(count, "en");
+        types.innerText = await changeLanguagePokemonType(i, "en");
+        count++;
+    }
+};
+
+///切り替えた言語を取得して、ポケモン名を返す
+const changeLanguagePokemonName = async (id, lang) => {
+    const pokemonDataUrl = "../../pokedex.json";
+    const response = await fetch(pokemonDataUrl);
+    const reslt = await response.json();
+    switch (lang) {
+        case "jp":
+            return reslt[id].name.japanese;
+            break;
+        case "en":
+            return reslt[id].name.english;
+            break;
+        default:
+            return reslt[id].name.english;
+            break;
+    }
+};
+
+///切り替えた言語を取得して、タイプを返す
+const changeLanguagePokemonType = async (id, lang) => {
+    const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const response = await fetch(pokemonDataUrl);
+    const reslt = await response.json();
+    let typeArray = [];
+    for (let i = 0; i < reslt.types.length; i++) {
+        let pokemonSplitUrl = reslt.types[i].type.url;
+        pokemonSplitUrl = pokemonSplitUrl.split("/");
+        const pokemonDataType = `https://pokeapi.co/api/v2/type/${pokemonSplitUrl[6]}/`;
+        const responseType = await fetch(pokemonDataType);
+        const resltType = await responseType.json();
+        switch (lang) {
+            case "jp":
+                typeArray[i] = resltType.names[8].name;
+                break;
+            case "en":
+                typeArray[i] = resltType.names[7].name;
+                break;
+        }
+    }
+    return typeArray;
 };
