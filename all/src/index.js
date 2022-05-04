@@ -1,6 +1,5 @@
 //ポケモンの総数
-//const allPokemonId = 809;
-const allPokemonId = 10;
+const allPokemonId = 809;
 
 //PokemonAPIからデータを取得
 const fetchPokemonApi = async () => {
@@ -69,8 +68,6 @@ const plasticSurgeryType = (pokemonType) => {
     return types;
 };
 
-const pokemonCard = document.getElementById("pokemon-card");
-
 fetchPokemonApi();
 
 const onClickToggle = () => {
@@ -108,7 +105,7 @@ const enPokemonCard = async () => {
     }
 };
 
-///言語を切り替えたポケモン名を取得する
+///切り替えた言語を取得して、ポケモン名を返す
 const changeLanguagePokemonName = async (id, lang) => {
     const pokemonDataUrl = "../../pokedex.json";
     const response = await fetch(pokemonDataUrl);
@@ -126,7 +123,7 @@ const changeLanguagePokemonName = async (id, lang) => {
     }
 };
 
-//言語を切り替えたタイプを取得する
+///切り替えた言語を取得して、タイプを返す
 const changeLanguagePokemonType = async (id, lang) => {
     const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const response = await fetch(pokemonDataUrl);
