@@ -89,7 +89,9 @@ const jpPokemonCard = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName${i}`);
         const types = document.getElementById(`pokemonType${i}`);
-        name.innerText = await changePokemonData(count, "jp");
+        name.innerText = await changeLanguagePokemonName(count, "jp");
+        changeLanguagePokemonType(i, "jp");
+        types.innerText = await changeLanguagePokemonType(i, "jp");
         count++;
     }
 };
@@ -100,14 +102,14 @@ const enPokemonCard = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName${i}`);
         const types = document.getElementById(`pokemonType${i}`);
-        name.innerText = await changePokemonData(count, "en");
+        name.innerText = await changeLanguagePokemonName(count, "en");
+        types.innerText = await changeLanguagePokemonType(i, "en");
         count++;
     }
 };
 
-//
-const changePokemonData = async (id, lang) => {
-    //英語名で取得
+///言語を切り替えたポケモン名を取得する
+const changeLanguagePokemonName = async (id, lang) => {
     const pokemonDataUrl = "../../pokedex.json";
     const response = await fetch(pokemonDataUrl);
     const reslt = await response.json();
@@ -122,4 +124,28 @@ const changePokemonData = async (id, lang) => {
             return reslt[id].name.english;
             break;
     }
+};
+
+//言語を切り替えたタイプを取得する
+const changeLanguagePokemonType = async (id, lang) => {
+    const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+    const response = await fetch(pokemonDataUrl);
+    const reslt = await response.json();
+    let typeArray = [];
+    for (let i = 0; i < reslt.types.length; i++) {
+        let pokemonSplitUrl = reslt.types[i].type.url;
+        pokemonSplitUrl = pokemonSplitUrl.split("/");
+        const pokemonDataType = `https://pokeapi.co/api/v2/type/${pokemonSplitUrl[6]}/`;
+        const responseType = await fetch(pokemonDataType);
+        const resltType = await responseType.json();
+        switch (lang) {
+            case "jp":
+                typeArray[i] = resltType.names[8].name;
+                break;
+            case "en":
+                typeArray[i] = resltType.names[7].name;
+                break;
+        }
+    }
+    return typeArray;
 };
