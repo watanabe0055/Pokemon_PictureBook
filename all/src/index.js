@@ -8,14 +8,15 @@ const fetchPokemonApi = async () => {
     }
 };
 
+//pokemonAPIをfetchする
 const getPokemonData = async (id) => {
-    //英語名で取得
     const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const response = await fetch(pokemonDataUrl);
     const reslt = await response.json();
     createPokemonCard(reslt);
 };
 
+//ポケモンカードを作成する
 const createPokemonCard = (data) => {
     const pokemon = {
         id: data.id,
