@@ -6,12 +6,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./reset.css" />
         <link rel="stylesheet" href="./main.css" />
-        <title>Document</title>
+        <link rel="stylesheet" href="./loader.css" />
+        <title>ポケモン図鑑</title>
     </head>
     <body>
-        <input type="checkbox" id="mycheck" onclick="onClickToggle()" />
-        <label class="check" for="mycheck"><div></div></label>
-        <div id="container"></div>
+        <div class="loader-containt">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <h2>Now Loading...</h2>
+            </div>
+        </div>
+        <div class="pokemon-pictreBook">
+            <input type="checkbox" id="mycheck" onclick="onClickToggle()" />
+            <label class="check" for="mycheck"><div></div></label>
+            <div id="container"></div>
+        </div>
     </body>
 </html>
 <script src="./index.js"></script>
