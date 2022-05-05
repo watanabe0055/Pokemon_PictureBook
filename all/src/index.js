@@ -68,8 +68,6 @@ const plasticSurgeryType = (pokemonType) => {
     return types;
 };
 
-fetchPokemonApi();
-
 const onClickToggle = () => {
     const toggle = document.getElementById("mycheck");
     //日本語の時
@@ -86,9 +84,8 @@ const jpPokemonCard = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName${i}`);
         const types = document.getElementById(`pokemonType${i}`);
-        name.innerText = await changeLanguagePokemonName(count, "jp");
-        changeLanguagePokemonType(i, "jp");
-        types.innerText = await changeLanguagePokemonType(i, "jp");
+        name.innerText = `名前:${await changeLanguagePokemonName(count, "jp")}`;
+        types.innerText = `タイプ:${await changeLanguagePokemonType(i, "jp")}`;
         count++;
     }
 };
@@ -99,8 +96,8 @@ const enPokemonCard = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName${i}`);
         const types = document.getElementById(`pokemonType${i}`);
-        name.innerText = await changeLanguagePokemonName(count, "en");
-        types.innerText = await changeLanguagePokemonType(i, "en");
+        name.innerText = `Name:${await changeLanguagePokemonName(count, "en")}`;
+        types.innerText = `Type:${await changeLanguagePokemonType(i, "en")}`;
         count++;
     }
 };
@@ -146,3 +143,5 @@ const changeLanguagePokemonType = async (id, lang) => {
     }
     return typeArray;
 };
+
+fetchPokemonApi();
