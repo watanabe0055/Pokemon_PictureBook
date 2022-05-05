@@ -146,3 +146,15 @@ const changeLanguagePokemonType = async (id, lang) => {
 };
 
 fetchPokemonApi();
+
+window.onload = function () {
+    setTimeout(() => {
+        //loader削除
+        const loader = document.querySelector(".loader-containt");
+        loader.classList.add("loaded");
+        //content表示
+        const content = document.querySelector(".pokemon-pictreBook");
+        content.style.visibility = "visible";
+        loader.style.position = "absolute";
+    }, 5000);
+};
