@@ -26,11 +26,11 @@ body {
     height: auto;
 }
 
-.image {
-    text-align: center;
+.card-item:nth-child(2) {
+    margin: 8px 10px;
+    text-align: left;
 }
-
-.card-item {
+.card-item:nth-child(3) {
     margin: 8px 10px;
     text-align: left;
 }

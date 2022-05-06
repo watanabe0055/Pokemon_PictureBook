@@ -2,18 +2,19 @@
 const allPokemonId = 809;
 
 //PokemonAPIからデータを取得
-const fetchPokemonApi = async () => {
+const allPokemonGet = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
-        await getPokemonData(i);
+        const getData = await fetchPokemonApi(i);
+        createPokemonCard(getData);
     }
 };
 
 //pokemonAPIをfetchする
-const getPokemonData = async (id) => {
+const fetchPokemonApi = async (id) => {
     const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const response = await fetch(pokemonDataUrl);
     const reslt = await response.json();
-    createPokemonCard(reslt);
+    return reslt;
 };
 
 //ポケモンカードを作成する
@@ -27,18 +28,19 @@ const createPokemonCard = (data) => {
     //innerHTMLで一括で生成する
     const pokemonEl = document.createElement("div");
     pokemonEl.classList.add("pokemon-card");
-    pokemonEl.setAttribute("id", "pokemonCard");
+    pokemonEl.setAttribute("id", `pokemonCard-${data.id}`);
+    pokemonEl.addEventListener("click", openModal);
     pokemonEl.innerHTML = `<img src=${
         pokemon.image
-    } alt="ポケモンの画像" class="pokemonImage" id="pokemon-image">
+    } alt="ポケモンの画像" class="pokemonImage" id=pokemonImage-${data.id}>
     <di>
-        <dt class="card-item1" id=pokemonId${data.id}>No: ${plasticSurgeryId(
+        <dt class="card-item" id=pokemonId-${data.id}>No: ${plasticSurgeryId(
         data.id
     )}</dt>
-        <dt class="card-item" id="pokemonName${data.id}">Name: ${
+        <dt class="card-item" id="pokemonName-${data.id}">Name: ${
         pokemon.name
     }</dt>
-        <dt class="card-item" id="pokemonType${
+        <dt class="card-item" id="pokemonType-${
             data.id
         }">Type: ${plasticSurgeryType(pokemon.type)}</dt>
     </di>`;
@@ -83,8 +85,8 @@ const onClickToggle = () => {
 const jpPokemonCard = async () => {
     let count = 0;
     for (let i = 1; i <= allPokemonId; i++) {
-        const name = document.getElementById(`pokemonName${i}`);
-        const types = document.getElementById(`pokemonType${i}`);
+        const name = document.getElementById(`pokemonName-${i}`);
+        const types = document.getElementById(`pokemonType-${i}`);
         name.innerText = `名前:${await changeLanguagePokemonName(count, "jp")}`;
         types.innerText = `タイプ:${await changeLanguagePokemonType(i, "jp")}`;
         count++;
@@ -95,8 +97,8 @@ const jpPokemonCard = async () => {
 const enPokemonCard = async () => {
     let count = 0;
     for (let i = 1; i <= allPokemonId; i++) {
-        const name = document.getElementById(`pokemonName${i}`);
-        const types = document.getElementById(`pokemonType${i}`);
+        const name = document.getElementById(`pokemonName-${i}`);
+        const types = document.getElementById(`pokemonType-${i}`);
         name.innerText = `Name:${await changeLanguagePokemonName(count, "en")}`;
         types.innerText = `Type:${await changeLanguagePokemonType(i, "en")}`;
         count++;
@@ -145,16 +147,76 @@ const changeLanguagePokemonType = async (id, lang) => {
     return typeArray;
 };
 
-fetchPokemonApi();
-
 window.onload = function () {
     setTimeout(() => {
         //loader削除
         const loader = document.querySelector(".loader-containt");
         loader.classList.add("loaded");
+        loader.remove();
         //content表示
         const content = document.querySelector(".pokemon-pictreBook");
         content.style.visibility = "visible";
         loader.style.position = "absolute";
-    }, 5000);
+    }, 500);
 };
+
+//モーダルの表示
+const openModal = async (event) => {
+    let clickId = event.target.id;
+    const modal = document.getElementById("modal");
+    modal.style.display = "block";
+    clickId = clickId.split("-");
+    const modalData = await fetchPokemonApi(clickId[1]);
+    modalInnerText(modalData);
+};
+
+//モーダルの非表示
+const closeModal = () => {
+    const modal = document.getElementById("modal");
+    modal.style.display = "none";
+};
+
+//バツボタン以外を押下しても、モーダルを閉じる
+window.addEventListener("click", function (e) {
+    if (e.target == modal) {
+        modal.style.display = "none";
+    }
+});
+
+const modalInnerText = (data) => {
+    const img = document.querySelector("#modalItemImage");
+    const id = document.querySelector("#modalItemId");
+    const name = document.querySelector("#modalItemName");
+    const type = document.querySelector("#modalItemType");
+    const height = document.querySelector("#modalItemHeight");
+    const weight = document.querySelector("#modalItemWeight");
+    const hp = document.querySelectorAll(".status-list-hp");
+    const attack = document.querySelectorAll(".status-list-attack");
+    const defense = document.querySelectorAll(".status-list-defense");
+    const spattack = document.querySelectorAll(".status-list-spattack");
+    const spdefense = document.querySelectorAll(".status-list-spdefense");
+    const speed = document.querySelectorAll(".status-list-speed");
+
+    img.src = `../../images/${plasticSurgeryId(data.id)}.png`;
+    id.innerText = `No: ${plasticSurgeryId(data.id)}`;
+    name.innerText = `Name: ${data.name}`;
+    type.innerText = `Type: ${plasticSurgeryType(data.types)}`;
+    height.innerText = `Height: ${data.height / 10}m`;
+    weight.innerText = `Weight: ${data.weight / 10}kg`;
+    statusBar(data.stats[0].base_stat, hp);
+    statusBar(data.stats[1].base_stat, attack);
+    statusBar(data.stats[2].base_stat, defense);
+    statusBar(data.stats[3].base_stat, spattack);
+    statusBar(data.stats[4].base_stat, spdefense);
+    statusBar(data.stats[5].base_stat, speed);
+};
+
+const statusBar = (num, stats) => {
+    let elementNum = 0;
+    for (let index = 1; index < num / 10; index++) {
+        stats[elementNum].style.backgroundColor = "#fc0";
+        elementNum++;
+    }
+};
+
+allPokemonGet();
