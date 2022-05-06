@@ -2,18 +2,19 @@
 const allPokemonId = 809;
 
 //PokemonAPIからデータを取得
-const fetchPokemonApi = async () => {
+const allPokemonGet = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
-        await getPokemonData(i);
+        const getData = await fetchPokemonApi(i);
+        createPokemonCard(getData);
     }
 };
 
 //pokemonAPIをfetchする
-const getPokemonData = async (id) => {
+const fetchPokemonApi = async (id) => {
     const pokemonDataUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
     const response = await fetch(pokemonDataUrl);
     const reslt = await response.json();
-    createPokemonCard(reslt);
+    return reslt;
 };
 
 //ポケモンカードを作成する
@@ -31,7 +32,7 @@ const createPokemonCard = (data) => {
     pokemonEl.addEventListener("click", openModal);
     pokemonEl.innerHTML = `<img src=${
         pokemon.image
-    } alt="ポケモンの画像" class="pokemonImage" id=pokemon-image-${data.id}>
+    } alt="ポケモンの画像" class="pokemonImage" id=pokemonImage-${data.id}>
     <di>
         <dt class="card-item" id=pokemonId-${data.id}>No: ${plasticSurgeryId(
         data.id
@@ -146,8 +147,6 @@ const changeLanguagePokemonType = async (id, lang) => {
     return typeArray;
 };
 
-fetchPokemonApi();
-
 window.onload = function () {
     setTimeout(() => {
         //loader削除
@@ -162,10 +161,13 @@ window.onload = function () {
 };
 
 //モーダルの表示
-const openModal = (event) => {
-    const clickId = event.target.id;
+const openModal = async (event) => {
+    let clickId = event.target.id;
     const modal = document.getElementById("modal");
     modal.style.display = "block";
+    clickId = clickId.split("-");
+    const modalData = await fetchPokemonApi(clickId[1]);
+    modalInnerText(modalData);
 };
 
 //モーダルの非表示
@@ -180,3 +182,21 @@ window.addEventListener("click", function (e) {
         modal.style.display = "none";
     }
 });
+
+const modalInnerText = (data) => {
+    const img = document.querySelector("#modalItemImage");
+    const id = document.querySelector("#modalItemId");
+    const name = document.querySelector("#modalItemName");
+    const type = document.querySelector("#modalItemType");
+    const height = document.querySelector("#modalItemHeight");
+    const weight = document.querySelector("#modalItemWeight");
+
+    img.src = `../../images/${plasticSurgeryId(data.id)}.png`;
+    id.innerText = `No: ${plasticSurgeryId(data.id)}`;
+    name.innerText = `Name: ${data.name}`;
+    type.innerText = `Type: ${plasticSurgeryType(data.types)}`;
+    height.innerText = `Height: ${data.height / 10}m`;
+    weight.innerText = `Weight: ${data.weight / 10}kg`;
+};
+
+allPokemonGet();
