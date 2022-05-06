@@ -4,6 +4,13 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
         <link rel="stylesheet" href="./reset.css" />
         <link rel="stylesheet" href="./main.css" />
         <link rel="stylesheet" href="./loader.css" />
@@ -23,14 +30,28 @@
         <div id="modal" class="modal">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h1>hello</h1>
                     <input
                         type="button"
                         id="closeBtn"
-                        value="close"
+                        class="closeBtn"
+                        value="&#10005;"
                         onclick="closeModal()"
                     />
                 </div>
+                <img class="modal-image" src="../../images/001.png" />
+                <di>
+                    <dt class="modai-items">No:001</dt>
+                    <dt class="modai-items">Name: フシギダネ</dt>
+                    <dt class="modai-items">Type: くさ、どく</dt>
+                    <dt class="modai-items">height: 0.7m</dt>
+                    <dt class="modai-items">weight: 6.9kg</dt>
+                    <dt class="modai-items">HP: 45</dt>
+                    <dt class="modai-items">attack: 49</dt>
+                    <dt class="modai-items">defense: 49</dt>
+                    <dt class="modai-items">special-attack: 65</dt>
+                    <dt class="modai-items">special-defense: 69</dt>
+                    <dt class="modai-items">speed: 45</dt>
+                </di>
             </div>
         </div>
         <div class="pokemon-pictreBook">
