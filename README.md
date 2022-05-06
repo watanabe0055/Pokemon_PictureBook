@@ -10,11 +10,12 @@
 
 ・モーダルで表示されるポケモンのステータスは、バーが動的に変動するようになっている為、直感的に分かりやすくしている
 
-# pokemon_API
-　使用したAPI
- https://pokeapi.co/
- 
-#使用した技術
-  HTML
-  CSS
-  Jacascript
+# 使用した技術
+・HTML
+
+・CSS
+
+・JacaScript
+
+・pokemonApi
+https://pokeapi.co/
