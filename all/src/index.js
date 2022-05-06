@@ -190,6 +190,12 @@ const modalInnerText = (data) => {
     const type = document.querySelector("#modalItemType");
     const height = document.querySelector("#modalItemHeight");
     const weight = document.querySelector("#modalItemWeight");
+    const hp = document.querySelectorAll(".status-list-hp");
+    const attack = document.querySelectorAll(".status-list-attack");
+    const defense = document.querySelectorAll(".status-list-defense");
+    const spattack = document.querySelectorAll(".status-list-spattack");
+    const spdefense = document.querySelectorAll(".status-list-spdefense");
+    const speed = document.querySelectorAll(".status-list-speed");
 
     img.src = `../../images/${plasticSurgeryId(data.id)}.png`;
     id.innerText = `No: ${plasticSurgeryId(data.id)}`;
@@ -197,6 +203,20 @@ const modalInnerText = (data) => {
     type.innerText = `Type: ${plasticSurgeryType(data.types)}`;
     height.innerText = `Height: ${data.height / 10}m`;
     weight.innerText = `Weight: ${data.weight / 10}kg`;
+    statusBar(data.stats[0].base_stat, hp);
+    statusBar(data.stats[1].base_stat, attack);
+    statusBar(data.stats[2].base_stat, defense);
+    statusBar(data.stats[3].base_stat, spattack);
+    statusBar(data.stats[4].base_stat, spdefense);
+    statusBar(data.stats[5].base_stat, speed);
+};
+
+const statusBar = (num, stats) => {
+    let elementNum = 0;
+    for (let index = 1; index < num / 10; index++) {
+        stats[elementNum].style.backgroundColor = "#fc0";
+        elementNum++;
+    }
 };
 
 allPokemonGet();

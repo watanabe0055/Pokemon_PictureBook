@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="./main.css" />
         <link rel="stylesheet" href="./loader.css" />
         <link rel="stylesheet" href="./modal.css" />
+        <link rel="stylesheet" href="./status.css" />
         <title>ポケモン図鑑</title>
     </head>
     <body>
@@ -43,17 +44,147 @@
                     id="modalItemImage"
                 />
                 <di>
-                    <dt class="modai-items" id="modalItemId"></dt>
-                    <dt class="modai-items" id="modalItemName"></dt>
-                    <dt class="modai-items" id="modalItemType"></dt>
-                    <dt class="modai-items" id="modalItemHeight"></dt>
-                    <dt class="modai-items" id="modalItemWeight"></dt>
-                    <dt class="modai-items" id="modalItemHp"></dt>
-                    <dt class="modai-items" id="modalItemAttack"></dt>
-                    <dt class="modai-items" id="modalItemDefense"></dt>
-                    <dt class="modai-items" id="modalItemSpAttack"></dt>
-                    <dt class="modai-items" id="modalItemSpDeffense"></dt>
-                    <dt class="modai-items" id="modalItemSpeed"></dt>
+                    <div class="modal-status-box">
+                        <dt class="modal-items" id="modalItemId"></dt>
+                        <dt class="modal-items" id="modalItemName"></dt>
+                        <dt class="modal-items" id="modalItemType"></dt>
+                        <dt class="modal-items" id="modalItemHeight"></dt>
+                        <dt class="modal-items" id="modalItemWeight"></dt>
+                    </div>
+                    <div class="modal-status-box">
+                        <div class="modal-item-hp-container">
+                            <dt class="modal-items" id="modalItemHp">
+                                HP
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-attack-container">
+                            <dt class="modal-items" id="modalItemAttack">
+                                Attack
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-defense-container">
+                            <dt class="modal-items" id="modalItemDefense">
+                                Defense
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-spattack-container">
+                            <dt class="modal-items" id="modalItemSpAttack">
+                                Special Attack
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-defense-container">
+                            <dt class="modal-items" id="modalItemSpDefense">
+                                Special Defense
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-speed-container">
+                            <dt class="modal-items" id="modalItemSpeed">
+                                Speed
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                    </div>
                 </di>
             </div>
         </div>

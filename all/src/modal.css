@@ -11,9 +11,9 @@
 }
 
 .modal-content {
-    background-color: #fffbe7;
+    background-color: #fcffe7;
     width: 500px;
-    height: 650px;
+    height: auto;
     margin: 40px auto;
     padding: 20px;
     text-align: center;
@@ -40,4 +40,22 @@
 
 .modai-items:nth-child(1) {
     text-align: center;
+}
+
+#modalItemId {
+    text-align: center;
+}
+
+.modal-status-box {
+    display: inline-block;
+    height: auto;
+    width: 400px;
+    background-color: #fefbe7;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: solid 1px #dae5d0;
+}
+
+.closeBtn {
+    float: right;
 }
