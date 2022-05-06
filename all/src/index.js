@@ -27,18 +27,19 @@ const createPokemonCard = (data) => {
     //innerHTMLで一括で生成する
     const pokemonEl = document.createElement("div");
     pokemonEl.classList.add("pokemon-card");
-    pokemonEl.setAttribute("id", "pokemonCard");
+    pokemonEl.setAttribute("id", `pokemonCard-${data.id}`);
+    pokemonEl.addEventListener("click", openModal);
     pokemonEl.innerHTML = `<img src=${
         pokemon.image
-    } alt="ポケモンの画像" class="pokemonImage" id="pokemon-image">
+    } alt="ポケモンの画像" class="pokemonImage" id=pokemon-image-${data.id}>
     <di>
-        <dt class="card-item1" id=pokemonId${data.id}>No: ${plasticSurgeryId(
+        <dt class="card-item" id=pokemonId-${data.id}>No: ${plasticSurgeryId(
         data.id
     )}</dt>
-        <dt class="card-item" id="pokemonName${data.id}">Name: ${
+        <dt class="card-item" id="pokemonName-${data.id}">Name: ${
         pokemon.name
     }</dt>
-        <dt class="card-item" id="pokemonType${
+        <dt class="card-item" id="pokemonType-${
             data.id
         }">Type: ${plasticSurgeryType(pokemon.type)}</dt>
     </di>`;
@@ -83,8 +84,8 @@ const onClickToggle = () => {
 const jpPokemonCard = async () => {
     let count = 0;
     for (let i = 1; i <= allPokemonId; i++) {
-        const name = document.getElementById(`pokemonName${i}`);
-        const types = document.getElementById(`pokemonType${i}`);
+        const name = document.getElementById(`pokemonName-${i}`);
+        const types = document.getElementById(`pokemonType-${i}`);
         name.innerText = `名前:${await changeLanguagePokemonName(count, "jp")}`;
         types.innerText = `タイプ:${await changeLanguagePokemonType(i, "jp")}`;
         count++;
@@ -95,8 +96,8 @@ const jpPokemonCard = async () => {
 const enPokemonCard = async () => {
     let count = 0;
     for (let i = 1; i <= allPokemonId; i++) {
-        const name = document.getElementById(`pokemonName${i}`);
-        const types = document.getElementById(`pokemonType${i}`);
+        const name = document.getElementById(`pokemonName-${i}`);
+        const types = document.getElementById(`pokemonType-${i}`);
         name.innerText = `Name:${await changeLanguagePokemonName(count, "en")}`;
         types.innerText = `Type:${await changeLanguagePokemonType(i, "en")}`;
         count++;
@@ -152,9 +153,30 @@ window.onload = function () {
         //loader削除
         const loader = document.querySelector(".loader-containt");
         loader.classList.add("loaded");
+        loader.remove();
         //content表示
         const content = document.querySelector(".pokemon-pictreBook");
         content.style.visibility = "visible";
         loader.style.position = "absolute";
-    }, 5000);
+    }, 500);
 };
+
+//モーダルの表示
+const openModal = (event) => {
+    const clickId = event.target.id;
+    const modal = document.getElementById("modal");
+    modal.style.display = "block";
+};
+
+//モーダルの非表示
+const closeModal = () => {
+    const modal = document.getElementById("modal");
+    modal.style.display = "none";
+};
+
+//バツボタン以外を押下しても、モーダルを閉じる
+window.addEventListener("click", function (e) {
+    if (e.target == modal) {
+        modal.style.display = "none";
+    }
+});
