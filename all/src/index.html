@@ -16,9 +16,12 @@
         <link rel="stylesheet" href="./loader.css" />
         <link rel="stylesheet" href="./modal.css" />
         <link rel="stylesheet" href="./status.css" />
+        <link rel="stylesheet" href="./search.css" />
+        <link rel="stylesheet" href="./scroll.css" />
         <title>ポケモン図鑑</title>
     </head>
     <body>
+        <!-- ローディング画面 -->
         <div class="loader-containt">
             <div class="loader">
                 <span></span>
@@ -28,6 +31,8 @@
                 <h2>Now Loading...</h2>
             </div>
         </div>
+
+        <!-- モーダル -->
         <div id="modal" class="modal">
             <div class="modal-content">
                 <div class="modal-body">
@@ -188,12 +193,20 @@
                 </di>
             </div>
         </div>
+
+        <!-- 言語選択 -->
+        <div class="search-container onloadView" id="changeItem">
+            <input type="number" class="search use_icon" id="search" placeholder="&#xf002" min="1" max="809"/>
+            <button class="search-btn" onclick="searchPokemon()">Search</button>
+        </div>
         <div class="pokemon-pictreBook">
             <input type="checkbox" id="mycheck" onclick="onClickToggle()" />
             <label class="check" for="mycheck"><div></div></label>
             <div id="container"></div>
         </div>
-        <div class="pageTopContainer" id="pageTop">
+
+        <!-- トップボタン -->
+        <div class="pageTopContainer onloadView" id="pageTop">
             <img src="../../imagesvg/Master_Ball_icon-icons.com_67545.svg" class="top-ball" onclick="scrollUp()"/>
         </div>
     </body>

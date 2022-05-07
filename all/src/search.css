@@ -1,0 +1,33 @@
+.use_icon {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.search {
+    width: 200px;
+    height: 30px;
+    background-color: #f4eeff;
+    border-radius: 15px;
+    border: solid 1px #dcd6f7;
+    padding: 8px;
+}
+
+.search-container {
+    float: right;
+}
+
+.search-btn {
+    text-align: center;
+    padding: 5px;
+    width: 80px;
+    border: solid 1px #97c4b8;
+    border-radius: 30px;
+    background-color: #ccf3ee;
+}
+.search-btn:hover {
+    background-color: #97c4b8;
+}

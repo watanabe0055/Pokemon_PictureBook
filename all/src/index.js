@@ -171,6 +171,10 @@ window.onload = function () {
         const content = document.querySelector(".pokemon-pictreBook");
         content.style.visibility = "visible";
         loader.style.position = "absolute";
+        const onloadDisplayTop = document.querySelector("#pageTop");
+        const onloadDisplayItem = document.querySelector("#changeItem");
+        onloadDisplayTop.classList.remove("onloadView");
+        onloadDisplayItem.classList.remove("onloadView");
     }, 500);
 };
 
@@ -269,7 +273,22 @@ const statusBar = (num, stats) => {
     }
 };
 
+//スクロール機能
 const scrollUp = () => {
     window.scroll({ top: 0, behavior: "smooth" });
+};
+
+//検索機能
+const searchPokemon = async () => {
+    const inputValue = document.querySelector("#search");
+    if (inputValue.value > 809) {
+        inputValue.value = 809;
+    } else if (inputValue.value <= 0) {
+        inputValue.value = 1;
+    }
+    const modal = document.getElementById("modal");
+    modal.style.display = "block";
+    const modalData = await fetchPokemonApi(inputValue.value);
+    modalInnerText(modalData);
 };
 allPokemonGet();
