@@ -1,5 +1,7 @@
 //ポケモンの総数
 const allPokemonId = 809;
+//現在選択している言語フラグ
+const toggle = document.getElementById("mycheck");
 
 //PokemonAPIからデータを取得
 const allPokemonGet = async () => {
@@ -72,7 +74,6 @@ const plasticSurgeryType = (pokemonType) => {
 };
 
 const onClickToggle = () => {
-    const toggle = document.getElementById("mycheck");
     //日本語の時
     if (toggle.checked) {
         jpPokemonCard();
@@ -87,8 +88,14 @@ const jpPokemonCard = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName-${i}`);
         const types = document.getElementById(`pokemonType-${i}`);
-        name.innerText = `名前:${await changeLanguagePokemonName(count, "jp")}`;
-        types.innerText = `タイプ:${await changeLanguagePokemonType(i, "jp")}`;
+        name.innerText = `名前:${await changeLanguagePokemonName(
+            count,
+            toggle.checked
+        )}`;
+        types.innerText = `タイプ:${await changeLanguagePokemonType(
+            i,
+            toggle.checked
+        )}`;
         count++;
     }
 };
@@ -99,8 +106,14 @@ const enPokemonCard = async () => {
     for (let i = 1; i <= allPokemonId; i++) {
         const name = document.getElementById(`pokemonName-${i}`);
         const types = document.getElementById(`pokemonType-${i}`);
-        name.innerText = `Name:${await changeLanguagePokemonName(count, "en")}`;
-        types.innerText = `Type:${await changeLanguagePokemonType(i, "en")}`;
+        name.innerText = `Name:${await changeLanguagePokemonName(
+            count,
+            toggle.checked
+        )}`;
+        types.innerText = `Type:${await changeLanguagePokemonType(
+            i,
+            toggle.checked
+        )}`;
         count++;
     }
 };
@@ -111,10 +124,10 @@ const changeLanguagePokemonName = async (id, lang) => {
     const response = await fetch(pokemonDataUrl);
     const reslt = await response.json();
     switch (lang) {
-        case "jp":
+        case true:
             return reslt[id].name.japanese;
             break;
-        case "en":
+        case false:
             return reslt[id].name.english;
             break;
         default:
@@ -136,10 +149,10 @@ const changeLanguagePokemonType = async (id, lang) => {
         const responseType = await fetch(pokemonDataType);
         const resltType = await responseType.json();
         switch (lang) {
-            case "jp":
+            case true:
                 typeArray[i] = resltType.names[8].name;
                 break;
-            case "en":
+            case false:
                 typeArray[i] = resltType.names[7].name;
                 break;
         }
@@ -147,6 +160,7 @@ const changeLanguagePokemonType = async (id, lang) => {
     return typeArray;
 };
 
+//ローディング画面
 window.onload = function () {
     setTimeout(() => {
         //loader削除
@@ -183,6 +197,7 @@ window.addEventListener("click", function (e) {
     }
 });
 
+//モーダル内のテキストを生成
 const modalInnerText = (data) => {
     const img = document.querySelector("#modalItemImage");
     const id = document.querySelector("#modalItemId");
@@ -197,6 +212,24 @@ const modalInnerText = (data) => {
     const spdefense = document.querySelectorAll(".status-list-spdefense");
     const speed = document.querySelectorAll(".status-list-speed");
 
+    //日本語の時
+    const label = document.querySelectorAll(".label");
+    if (toggle.checked) {
+        label[0].innerText = "たいりょく";
+        label[1].innerText = "こうげき";
+        label[2].innerText = "ぼうぎょ";
+        label[3].innerText = "とくこう";
+        label[4].innerText = "とくぼう";
+        label[5].innerText = "すばやさ";
+    } //英語の時
+    else {
+        label[0].innerText = "HP";
+        label[1].innerText = "Attack";
+        label[2].innerText = "Defense";
+        label[3].innerText = "Special Attack";
+        label[4].innerText = "Special Defense";
+        label[5].innerText = "Speed";
+    }
     img.src = `../../images/${plasticSurgeryId(data.id)}.png`;
     id.innerText = `No: ${plasticSurgeryId(data.id)}`;
     name.innerText = `Name: ${data.name}`;
@@ -211,6 +244,7 @@ const modalInnerText = (data) => {
     statusBar(data.stats[5].base_stat, speed);
 };
 
+//ステータスの色を変える
 const statusBar = (num, stats) => {
     let elementNum = 0;
     for (let index = 1; index < num / 10; index++) {
