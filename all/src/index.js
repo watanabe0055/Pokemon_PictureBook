@@ -107,7 +107,7 @@ const enPokemonCard = async () => {
         const name = document.getElementById(`pokemonName-${i}`);
         const types = document.getElementById(`pokemonType-${i}`);
         name.innerText = `Name:${await changeLanguagePokemonName(
-            count,
+            i,
             toggle.checked
         )}`;
         types.innerText = `Type:${await changeLanguagePokemonType(
@@ -198,7 +198,7 @@ window.addEventListener("click", function (e) {
 });
 
 //モーダル内のテキストを生成
-const modalInnerText = (data) => {
+const modalInnerText = async (data) => {
     const img = document.querySelector("#modalItemImage");
     const id = document.querySelector("#modalItemId");
     const name = document.querySelector("#modalItemName");
@@ -215,6 +215,16 @@ const modalInnerText = (data) => {
     //日本語の時
     const label = document.querySelectorAll(".label");
     if (toggle.checked) {
+        name.innerText = `名前: ${await changeLanguagePokemonName(
+            data.id - 1,
+            toggle.checked
+        )}`;
+        type.innerText = `タイプ: ${await changeLanguagePokemonType(
+            data.id,
+            toggle.checked
+        )}`;
+        height.innerText = `高さ: ${data.height / 10}m`;
+        weight.innerText = `重さ: ${data.weight / 10}kg`;
         label[0].innerText = "たいりょく";
         label[1].innerText = "こうげき";
         label[2].innerText = "ぼうぎょ";
@@ -223,6 +233,16 @@ const modalInnerText = (data) => {
         label[5].innerText = "すばやさ";
     } //英語の時
     else {
+        name.innerText = `Name: ${await changeLanguagePokemonName(
+            data.id - 1,
+            toggle.checked
+        )}`;
+        type.innerText = `Type: ${await changeLanguagePokemonType(
+            data.id,
+            toggle.checked
+        )}`;
+        height.innerText = `Height: ${data.height / 10}m`;
+        weight.innerText = `Weight: ${data.weight / 10}kg`;
         label[0].innerText = "HP";
         label[1].innerText = "Attack";
         label[2].innerText = "Defense";
@@ -232,10 +252,6 @@ const modalInnerText = (data) => {
     }
     img.src = `../../images/${plasticSurgeryId(data.id)}.png`;
     id.innerText = `No: ${plasticSurgeryId(data.id)}`;
-    name.innerText = `Name: ${data.name}`;
-    type.innerText = `Type: ${plasticSurgeryType(data.types)}`;
-    height.innerText = `Height: ${data.height / 10}m`;
-    weight.innerText = `Weight: ${data.weight / 10}kg`;
     statusBar(data.stats[0].base_stat, hp);
     statusBar(data.stats[1].base_stat, attack);
     statusBar(data.stats[2].base_stat, defense);
