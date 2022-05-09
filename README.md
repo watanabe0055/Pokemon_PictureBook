@@ -1,4 +1,5 @@
 # ポケモン図鑑
+http://pokemon-picture-book.tk.s3-website-ap-northeast-1.amazonaws.com/
 
 ## アプリ機能
 
@@ -24,3 +25,6 @@
 
 ・pokemonApi
 https://pokeapi.co/
+
+・AWS
+ S3バケット
