@@ -1,37 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./reset.css">
-    <title>Document</title>
-</head>
-
-<body>
-    <div>
-        <p>ポケモン図鑑</p>
-        <input class="input-box" type="number" id="Pokemon-id" min="1" value="1" />
-        <button class="search-button" onclick="onclickPokemonId()">検索</button>
-    </div>
-    <div class="pokemon-card">
-        <img class="pokemon-image" id="pokemonImage" src="" alt="ポケモンの画像です"></img>
-        <di>
-            <div>
-
-                <dt>No</dt>
-                <dt id="pokemonId"></dt>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="./reset.css" />
+        <link rel="stylesheet" href="./main.css" />
+        <link rel="stylesheet" href="./loader.css" />
+        <link rel="stylesheet" href="./modal.css" />
+        <link rel="stylesheet" href="./status.css" />
+        <link rel="stylesheet" href="./search.css" />
+        <link rel="stylesheet" href="./scroll.css" />
+        <title>ポケモン図鑑</title>
+    </head>
+    <body>
+        <!-- ローディング画面 -->
+        <div class="loader-containt">
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <h2>Now Loading...</h2>
             </div>
-            <div>
+        </div>
 
-                <dt>名前</dt>
-                <dt class="pokemon-name" id="showPokemonData"></dt>
+        <!-- モーダル -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img
+                        id="closeBtn"
+                        class="closeBtn"
+                        src="https://img.icons8.com/fluency/48/000000/pokeball.png"
+                        onclick="closeModal()"
+                    />
+                </div>
+                <img
+                    class="modal-image"
+                    src="../../images/001.png"
+                    id="modalItemImage"
+                />
+                <di>
+                    <div class="modal-status-box">
+                        <dt class="modal-items" id="modalItemId"></dt>
+                        <dt class="modal-items" id="modalItemName"></dt>
+                        <dt class="modal-items" id="modalItemType"></dt>
+                        <dt class="modal-items" id="modalItemHeight"></dt>
+                        <dt class="modal-items" id="modalItemWeight"></dt>
+                    </div>
+                    <div class="modal-status-box">
+                        <div class="modal-item-hp-container">
+                            <dt class="modal-items" id="modalItemHp">
+                                <p class="label">HP</p>
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                    <li class="status-list-hp"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-attack-container">
+                            <dt class="modal-items" id="modalItemAttack">
+                                <p class="label">Attack</p>
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                    <li class="status-list-attack"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-defense-container">
+                            <dt class="modal-items" id="modalItemDefense">
+                                <p class="label">Defense</p>
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                    <li class="status-list-defense"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-spattack-container">
+                            <dt class="modal-items" id="modalItemSpAttack">
+                                <p class="label">Special Attack</p>
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                    <li class="status-list-spattack"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-defense-container">
+                            <dt class="modal-items" id="modalItemSpDefense">
+                                <p class="label">Special Defense</p>
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                    <li class="status-list-spdefense"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                        <div class="modal-item-speed-container">
+                            <dt class="modal-items" id="modalItemSpeed">
+                                <p class="label">Speed</p>
+                                <ul class="modal-status-bar">
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                    <li class="status-list-speed"></li>
+                                </ul class="modal-status-bar">
+                            </dt>
+                        </div>
+                    </div>
+                </di>
             </div>
-        </di>
-    </div>
-</body>
-<script src="./index.js"></script>
+        </div>
 
+        <!-- 言語選択 -->
+        <div class="search-container onloadView" id="changeItem">
+            <input type="number" class="search use_icon" id="search" placeholder="&#xf002" min="1" max="809"/>
+            <button class="search-btn" onclick="searchPokemon()">Search</button>
+        </div>
+        <div class="pokemon-pictreBook">
+            <input type="checkbox" id="mycheck" onclick="onClickToggle()" />
+            <label class="check" for="mycheck"><div></div></label>
+            <div id="container"></div>
+        </div>
+
+        <!-- トップボタン -->
+        <div class="pageTopContainer onloadView" id="pageTop">
+            <img src="../../imagesvg/Master_Ball_icon-icons.com_67545.svg" class="top-ball" onclick="scrollUp()"/>
+        </div>
+    </body>
 </html>
+<script src="./index.js"></script>

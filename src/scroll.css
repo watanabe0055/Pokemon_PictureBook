@@ -1,0 +1,14 @@
+.top-ball {
+    width: 65px;
+    height: auto;
+    cursor: pointer;
+}
+.pageTopContainer {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+.onloadView {
+    display: none;
+}
