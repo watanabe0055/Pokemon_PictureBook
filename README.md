@@ -23,8 +23,11 @@ http://pokemon-picture-book.tk.s3-website-ap-northeast-1.amazonaws.com/
 
 ・JacaScript
 
-・pokemonApi
-https://pokeapi.co/
 
 ・AWS
  S3バケット
+
+API
+
+・pokemonApi
+https://pokeapi.co/
